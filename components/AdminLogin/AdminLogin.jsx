@@ -1,12 +1,47 @@
+import {useState} from "react";
+import { loginAdmin } from "../api/auth";
+
 
 function AdminLogin() {
-  const handleLogin = (e) => {
+
+  const [loading,setLoading] = useState(false);
+
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
+
+    try {
+      setLoading(true);
+      const data = await loginAdmin(email,password);
+
+      localStorage.setItem("token", data.token);
+
+      alert("Login Successful");
+      window.location.href = "/admin";
+}
+  catch (error) {
+
+    console.error("Login Failed ", error.response?.data || error.message);
+    alert(error.response?.data?.message || "Login failed")
+
+
+  }
+  finally {
+
+    setLoading(false);
+  }
+
+
+
+
     // Add real authentication logic here
     alert(`Admin login:\nEmail: ${email}\nPassword: ${password}`);
   };
+
+
+  
 
   return (
     <div className="h-screen flex items-center justify-center bg-gray-100">
@@ -37,7 +72,7 @@ function AdminLogin() {
           </div>
           <button
             type="submit"
-            className="w-full bg-green-700 text-white py-2 rounded font-medium hover:bg-green-800"
+            className="w-full bg-green-700 text-white py-2 rounded font-medium hover:bg-green-800" disabled={loading}
           >
             Login
           </button>

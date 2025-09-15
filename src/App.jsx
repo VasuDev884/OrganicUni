@@ -7,6 +7,7 @@ import Clients from '../components/Clients/Clients';
 import Contact from '../components/Contact/Contact';
 import Footer from '../components/Footer/Footer';
 import {Routes, Route, Navigate } from 'react-router-dom';
+import AdminLogin from '../components/AdminLogin/AdminLogin';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Navbar />
       <main className="min-h-screen bg-gray-50 font-sans pt-20">
         <Routes>
+          <Route path="/AdminLogin" element={<AdminLogin/>}/>
           <Route path="/" element={<Hero />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
