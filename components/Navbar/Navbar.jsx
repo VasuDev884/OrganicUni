@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const navItems = [
+    {name: "AdminLogin", path: "/AdminLogin"},
     { name: "home", path: "/" },
     { name: "about", path: "/about" },
     { name: "services", path: "/services" },
